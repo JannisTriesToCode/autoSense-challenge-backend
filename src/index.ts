@@ -1,8 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { connectToDatabase } from './databaseConnection';
-import { roleRoute } from './routes/role.route'
-import { userRoute } from './routes/user.route'
+import { fuelstationRoute } from './routes/fuelstation.route'
 
 dotenv.config();
 
@@ -18,8 +17,7 @@ app.get('/', (req, res) => {
   return res.json({ message: 'Hello World!' });
 });
 
-app.use('/', roleRoute());
-app.use('/', userRoute());
+app.use('/', fuelstationRoute());
 
 app.listen(PORT, async () => {
   await connectToDatabase();
