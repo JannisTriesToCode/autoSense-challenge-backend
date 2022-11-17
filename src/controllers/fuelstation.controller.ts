@@ -30,4 +30,52 @@ const getAllFuelstations = async (req: Request, res: Response) => {
   return res.status(200).json({ data: fuelstations });
 };
 
-export { createFuelstation, getAllFuelstations };
+const getFuelstation = async (req: Request, res: Response) => {
+    const { id } = req.params;
+  
+    const fuelstation = await Fuelstation.findOne({ id: id }).populate('fuelstation').exec();
+  
+    if (!fuelstation) {
+      return res.status(404).json({ message: `Fuelstation with id "${id}" not found.` });
+    }
+  
+    return res.status(200).json({ data: fuelstation });
+};
+  
+const updateFuelstation = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { name, pumps } = req.body;
+  
+    const fuelstation = await Fuelstation.findOne({ id: id });
+  
+    if (!fuelstation) {
+      return res.status(404).json({ message: `Fuelstation with id "${id}" not found.` });
+    }
+  
+    if (!name || !pumps) {
+      return res.status(422).json({ message: 'The fields "name" and "pumps" are required' });
+    }
+  
+    // Update name
+    await Fuelstation.updateOne({ id: id }, { name });
+
+    // Update pump prices
+    for (var pump of pumps) {
+        console.log(await Fuelstation.updateOne({ id: id, "pumps.id": pump.id }, { $set: { "pumps.$.price": pump.price} }))
+    }
+    
+  
+    const fuelstationUpdated = await Fuelstation.findOne({ id: id });
+  
+    return res.status(200).json({ data: fuelstationUpdated });
+};
+  
+const deleteFuelstation = async (req: Request, res: Response) => {
+    const { id } = req.params;
+  
+    await Fuelstation.findOneAndDelete({ id: id });
+  
+    return res.status(200).json({ message: 'Fuelstation deleted successfully.' });
+};
+
+export { createFuelstation, getAllFuelstations, getFuelstation, updateFuelstation, deleteFuelstation };
