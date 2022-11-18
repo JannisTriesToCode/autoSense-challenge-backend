@@ -9,6 +9,12 @@ const createFuelstation = async (req: Request, res: Response) => {
     return res.status(422).json({ message: 'The fields id, name, address, city, latitude, and longitude are required' });
   }
 
+  const fuelstation = await Fuelstation.findOne({ id: id }).populate('fuelstation').exec();
+
+  if (fuelstation) {
+    return res.status(404).json({ message: `Fuelstation with id "${id}" already exists.` });
+  }
+
   const fuelstationInput: FuelstationInput = {
     id,
     name,
