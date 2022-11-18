@@ -17,6 +17,15 @@ app.get('/', (req, res) => {
   return res.json({ message: 'Hello World!' });
 });
 
+app.use((req, res, next) => {
+  const apiKey = req.get('API-Key')
+  if (!apiKey || apiKey !== process.env.API_KEY) {
+    res.status(401).json({error: 'Unauthorised'})
+  } else {
+    next()
+  }
+})
+
 app.use('/', fuelstationRoute());
 
 app.listen(PORT, async () => {
