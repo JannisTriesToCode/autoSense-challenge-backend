@@ -11,7 +11,7 @@ const fuelstationRoute = () => {
   router.get('/fuelstations/:id', getFuelstation);
 
   router.patch('/fuelstations/:id', updateFuelstation);
-  
+
   router.delete('/fuelstations/:id', deleteFuelstation);
 
   return router;

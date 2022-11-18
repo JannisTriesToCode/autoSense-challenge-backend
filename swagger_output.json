@@ -21,22 +21,22 @@
             "schema": {
               "type": "object",
               "properties": {
-                "id": {
-                  "example": "any"
-                },
-                "name": {
-                  "example": "any"
-                },
                 "address": {
                   "example": "any"
                 },
                 "city": {
                   "example": "any"
                 },
+                "id": {
+                  "example": "any"
+                },
                 "latitude": {
                   "example": "any"
                 },
                 "longitude": {
+                  "example": "any"
+                },
+                "name": {
                   "example": "any"
                 },
                 "pumps": {
