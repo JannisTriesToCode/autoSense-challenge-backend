@@ -67,7 +67,7 @@ const updateFuelstation = async (req: Request, res: Response) => {
 
   // Update pump prices
   for (const pump of pumps) {
-    console.log(await Fuelstation.updateOne({ id, 'pumps.id': pump.id }, { $set: { 'pumps.$.price': pump.price } }));
+    await Fuelstation.updateOne({ id, 'pumps.id': pump.id }, { $set: { 'pumps.$.price': pump.price } });
   }
 
   const fuelstationUpdated = await Fuelstation.findOne({ id });
