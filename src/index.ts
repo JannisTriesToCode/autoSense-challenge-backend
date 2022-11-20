@@ -12,7 +12,7 @@ const PORT = parseInt(process.env.PORT || '4500');
 const app = express();
 
 // TODO: Set path to frontend
-app.use(cors())
+app.use(cors());
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

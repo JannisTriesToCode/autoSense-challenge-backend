@@ -28,9 +28,11 @@ const createFuelstation = async (req: Request, res: Response) => {
   try {
     // Create new fuelstation
     const fuelstationCreated = await Fuelstation.create(fuelstationInput);
+
     return res.status(201).json({ data: fuelstationCreated });
   } catch (e) {
-    const error = (e as Error) 
+    const error = e as Error;
+
     if (error.name === 'ValidationError') {
       return res.status(400).send(error);
     }
@@ -42,6 +44,7 @@ const createFuelstation = async (req: Request, res: Response) => {
 const getAllFuelstations = async (req: Request, res: Response) => {
   try {
     const fuelstations = await Fuelstation.find().populate('fuelstation').sort('-createdAt').exec();
+
     return res.status(200).json({ data: fuelstations });
   } catch (e) {
     return res.status(500).send('Something went wrong');
@@ -51,6 +54,7 @@ const getAllFuelstations = async (req: Request, res: Response) => {
 // Function to get specific fuelstation
 const getFuelstation = async (req: Request, res: Response) => {
   const { id } = req.params;
+
   try {
     const fuelstation = await Fuelstation.findOne({ id }).populate('fuelstation').exec();
 
@@ -93,7 +97,8 @@ const updateFuelstation = async (req: Request, res: Response) => {
 
     return res.status(200).json({ data: fuelstationUpdated });
   } catch (e) {
-    const error = (e as Error)
+    const error = e as Error;
+
     if (error.name === 'ValidationError' || error.name === 'CastError') {
       return res.status(400).send(error);
     }
