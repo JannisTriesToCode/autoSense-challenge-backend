@@ -23,6 +23,22 @@ __A mongoDB database must be running for the application to work.__ Set the conn
 
 ## Documentation
 
+### Frontend
+
+Can be found [here](https://github.com/JannisTriesToCode/autoSense-challenge-frontend).
+
+### Architecture
+
+High Level
+
+![](./documentation/autoSense_Challenge_Architecture_1.png "High Level")
+
+Backend
+
+![](./documentation/autoSense_Challenge_Architecture_2.png "Backend")
+
+### API
+
 API is auto-documented by swagger. Accessible at http://localhost:4500/doc/.
 
 Note: The Patch Endpoint can only change the parameter `name` and the `price` of existing pumps. For the latter the `id` and new `price` are required.
@@ -47,3 +63,4 @@ Data:
     ]
 }
 ```
+
