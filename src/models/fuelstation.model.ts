@@ -1,4 +1,4 @@
-import mongoose, { Schema, Model, Document } from 'mongoose';
+import mongoose, { Schema, Model, Document, Decimal128 } from 'mongoose';
 
 const pumpSchema = new Schema(
   {
@@ -11,7 +11,7 @@ const pumpSchema = new Schema(
       required: true,
     },
     price: {
-      type: Schema.Types.String,
+      type: Schema.Types.Decimal128,
       required: true,
     },
     available: {
@@ -29,8 +29,8 @@ type FuelstationDocument = Document & {
   name: string;
   address: string;
   city: string;
-  latitude: string;
-  longitude: string;
+  latitude: Decimal128;
+  longitude: Decimal128;
   pumps: Schema;
 };
 
@@ -64,11 +64,11 @@ const fuelstationSchema = new Schema(
       required: true,
     },
     latitude: {
-      type: Schema.Types.String,
+      type: Schema.Types.Decimal128,
       required: true,
     },
     longitude: {
-      type: Schema.Types.String,
+      type: Schema.Types.Decimal128,
       required: true,
     },
     pumps: {
