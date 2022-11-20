@@ -15,6 +15,15 @@ const createFuelstation = async (req: Request, res: Response) => {
     return res.status(404).json({ message: `Fuelstation with id "${id}" already exists.` });
   }
 
+  let pump_ids: Array<number> = [];
+  for (const pump of pumps) {
+    const pump_id = pump.id;
+    if(pump_ids.includes(pump_id)) {
+      return res.status(404).json({ message: 'Pump IDs within a fuelstation must be unique.' });
+    }
+    pump_ids.push(pump_id)
+  }
+
   const fuelstationInput: FuelstationInput = {
     id,
     name,
@@ -36,6 +45,8 @@ const createFuelstation = async (req: Request, res: Response) => {
     if (error.name === 'ValidationError') {
       return res.status(400).send(error);
     }
+
+    console.log(error)
     return res.status(500).send('Something went wrong');
   }
 };
