@@ -17,7 +17,9 @@ npm install
 ```bash
 npm start
 ```
-The application will be launched by [Nodemon](https://nodemon.com). It will restart automatically on file change
+The application will be launched by [Nodemon](https://nodemon.com). It will restart automatically on file change.
+
+__A mongoDB database must be running for the application to work.__ Set the connection details in  `.env`.
 
 ## Documentation
 
